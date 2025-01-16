@@ -1,6 +1,8 @@
 package com.natvalentine.handlers;
 
 import com.natvalentine.board.commands.usecases.CreateBoardUseCase;
+import com.natvalentine.data.BoardRequestDTO;
+import com.natvalentine.mapper.BoardMapper;
 import com.natvalentine.validator.RequestValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

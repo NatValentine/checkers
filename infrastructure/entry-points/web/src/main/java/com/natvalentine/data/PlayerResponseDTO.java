@@ -5,8 +5,9 @@ public class PlayerResponseDTO {
     private String userId;
     private String color;
     private Boolean isCurrent;
+    private String gameId;
 
-    public PlayerResponseDTO(String id, String userId, String color, Boolean isCurrent) {
+    public PlayerResponseDTO(String id, String userId, String color, Boolean isCurrent, String gameId) {
         this.id = id;
         this.userId = userId;
         this.color = color;
@@ -43,5 +44,13 @@ public class PlayerResponseDTO {
 
     public void setCurrent(Boolean current) {
         isCurrent = current;
+    }
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
     }
 }

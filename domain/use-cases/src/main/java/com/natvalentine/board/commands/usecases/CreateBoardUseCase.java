@@ -7,6 +7,7 @@ import com.natvalentine.board.commands.CreateBoardCommand;
 import com.natvalentine.board.queries.responses.BoardResponse;
 import com.natvalentine.gateway.IBusEvent;
 import com.natvalentine.gateway.IEventStore;
+import com.natvalentine.gateway.mapper.TileMapper;
 import com.natvalentine.generics.interfaces.IUseCaseExecute;
 import com.natvalentine.generics.utils.ColorsEnum;
 import com.natvalentine.piece.Piece;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Component
 public class CreateBoardUseCase implements IUseCaseExecute<CreateBoardCommand, BoardResponse> {
@@ -49,7 +51,7 @@ public class CreateBoardUseCase implements IUseCaseExecute<CreateBoardCommand, B
                             .doOnNext(busEvent::sendEventBoardCreated)
                             .then(Mono.just(new BoardResponse(
                                     newBoard.getId().getValue(),
-                                    newBoard.getTiles(),
+                                    newBoard.getTiles().stream().map(TileMapper::toResponse).collect(Collectors.toCollection(ArrayList::new)),
                                     game.getId().getValue()
                             )));
                 });

@@ -45,7 +45,7 @@ public class BusListener implements IBusEventListener {
     }
 
     @Override
-    @RabbitListener(queues = "#{@rabbitProperties.getPlayerQueue()}")
+    @RabbitListener(queues = "#{@rabbitProperties.getPlayerCreatedQueue()}")
     public void receivePlayerCreated(DomainEvent event) {
         PlayerCreated playerCreated = (PlayerCreated) event;
         PlayerDTO playerDTO = new PlayerDTO(

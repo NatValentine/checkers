@@ -1,5 +1,5 @@
 package com.natvalentine.data;
 
-public class TileResponseDTO {
+public record TileResponseDTO (Integer x, Integer y, PieceResponseDTO piece) {
 
 }

@@ -1,6 +1,7 @@
 package com.natvalentine.gateway.mapper;
 
 import com.natvalentine.board.Tile;
+import com.natvalentine.board.queries.responses.TileResponse;
 import com.natvalentine.gateway.dto.TileDTO;
 
 public class TileMapper {
@@ -18,5 +19,9 @@ public class TileMapper {
             tile.setPiece(PieceMapper.toEntity(dto.getPiece()));
         }
         return tile;
+    }
+
+    public static TileResponse toResponse(Tile tile) {
+        return new TileResponse(tile.getLocation().getValue().x(), tile.getLocation().getValue().y(), PieceMapper.toResponse(tile.getPiece()));
     }
 }

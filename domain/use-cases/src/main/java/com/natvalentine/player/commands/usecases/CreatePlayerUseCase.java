@@ -1,6 +1,7 @@
 package com.natvalentine.player.commands.usecases;
 
 import com.natvalentine.aggregateGame.Game;
+import com.natvalentine.aggregateGame.values.GameId;
 import com.natvalentine.gateway.IBusEvent;
 import com.natvalentine.gateway.IEventStore;
 import com.natvalentine.generics.interfaces.IUseCaseExecute;
@@ -8,8 +9,6 @@ import com.natvalentine.player.Player;
 import com.natvalentine.player.commands.CreatePlayerCommand;
 import com.natvalentine.player.queries.responses.PlayerResponse;
 import com.natvalentine.player.values.PlayerId;
-import com.natvalentine.player.values.objects.Color;
-import com.natvalentine.user.values.UserId;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
@@ -26,15 +25,16 @@ public class CreatePlayerUseCase implements IUseCaseExecute<CreatePlayerCommand,
     @Override
     public Mono<PlayerResponse> execute(CreatePlayerCommand request) {
         var events = eventRepository.findAggregate(request.getAggregateId());
-        return Game.from(request.getAggregateId(), events)
+        var gameId = request.getAggregateId() != null ? request.getAggregateId() : new GameId().getValue();
+        return Game.from(gameId, events)
                 .flatMap(game -> {
                     var playerId = new PlayerId().getValue();
-                    game.createPlayer(request.getUserId(), playerId);
+                    game.createPlayer(playerId, request.getUserId());
 
                     Player newPlayer;
                     if (game.getWhitePlayer().getId().getValue().equals(playerId))
                         newPlayer = game.getWhitePlayer();
-                    else if (game.getBlackPlayer().getId().getValue().equals(playerId))
+                    else if (game.getBlackPlayer() != null && game.getBlackPlayer().getId().getValue().equals(playerId))
                         newPlayer = game.getBlackPlayer();
                     else throw new RuntimeException("Player could not be created.");
 

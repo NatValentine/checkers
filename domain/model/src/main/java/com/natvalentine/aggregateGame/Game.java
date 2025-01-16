@@ -35,12 +35,10 @@ public class Game extends AggregateRoot<GameId> {
 
     public Game() {
         super(new GameId());
-        setSubscription(new GameHandler(this));
     }
 
     protected Game(final String id) {
         super(GameId.of(id));
-        setSubscription(new GameHandler(this));
     }
 
     public static Mono<Game> from(final String id, Flux<DomainEvent> events) {
