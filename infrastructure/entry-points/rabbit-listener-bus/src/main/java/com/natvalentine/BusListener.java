@@ -1,7 +1,7 @@
 package com.natvalentine;
 
 
-import com.natvalentine.aggregate.events.UserCreated;
+import com.natvalentine.user.events.UserCreated;
 import com.natvalentine.gateway.IBusEventListener;
 import com.natvalentine.gateway.dto.UserDTO;
 import com.natvalentine.generics.domain.DomainEvent;

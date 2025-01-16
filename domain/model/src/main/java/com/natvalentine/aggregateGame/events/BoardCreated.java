@@ -1,4 +1,4 @@
-package com.natvalentine.aggregate.events;
+package com.natvalentine.aggregateGame.events;
 
 import com.natvalentine.board.Tile;
 import com.natvalentine.generics.domain.DomainEvent;
@@ -10,7 +10,7 @@ public class BoardCreated extends DomainEvent {
     private final ArrayList<Tile> tiles;
 
     public BoardCreated(String id) {
-        super(EventsEnum.BOARD_CREATED.name());
+        super(GameEventsEnum.BOARD_CREATED.name());
         this.id = id;
         this.tiles = this.generateBoard();
     }

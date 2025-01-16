@@ -1,4 +1,4 @@
-package com.natvalentine.aggregate;
+package com.natvalentine.aggregateGame;
 
 import com.natvalentine.generics.domain.DomainActionsContainer;
 

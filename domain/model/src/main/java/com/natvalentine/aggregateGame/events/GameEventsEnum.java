@@ -1,7 +1,6 @@
-package com.natvalentine.aggregate.events;
+package com.natvalentine.aggregateGame.events;
 
-public enum EventsEnum {
-    USER_CREATED,
+public enum GameEventsEnum {
     PLAYER_CREATED,
     SECOND_PLAYER_JOINED,
     BOARD_CREATED,

@@ -8,10 +8,15 @@ public class UserRequestDTO {
     @Size(min = 3, max = 50)
     private String username;
 
+    @NotBlank(message = "Password cannot be blank")
+    @Size(min = 3, max = 50)
+    private String password;
+
     public UserRequestDTO() {}
 
-    public UserRequestDTO(String username) {
+    public UserRequestDTO(String username, String password) {
         this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {
@@ -20,5 +25,13 @@ public class UserRequestDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

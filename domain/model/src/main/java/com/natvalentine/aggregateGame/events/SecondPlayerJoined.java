@@ -1,4 +1,4 @@
-package com.natvalentine.aggregate.events;
+package com.natvalentine.aggregateGame.events;
 
 import com.natvalentine.generics.domain.DomainEvent;
 import com.natvalentine.player.Player;
@@ -10,7 +10,7 @@ public class SecondPlayerJoined extends DomainEvent {
     private final ArrayList<Player> players;
 
     public SecondPlayerJoined(ArrayList<Player> players) {
-        super(EventsEnum.SECOND_PLAYER_JOINED.name());
+        super(GameEventsEnum.SECOND_PLAYER_JOINED.name());
         this.players = players;
         setStartingPlayer();
     }

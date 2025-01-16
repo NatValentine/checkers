@@ -11,6 +11,6 @@ public class UserMapper {
     }
 
     public static CreateUserCommand toEntity(UserRequestDTO userRequestDTO) {
-        return new CreateUserCommand(userRequestDTO.getUsername());
+        return new CreateUserCommand(userRequestDTO.getUsername(), userRequestDTO.getPassword());
     }
 }

@@ -4,7 +4,6 @@ import com.natvalentine.gateway.IBusEvent;
 import com.natvalentine.generics.domain.DomainEvent;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
 
 @Service
 public class BusAdapter implements IBusEvent {
@@ -17,10 +16,7 @@ public class BusAdapter implements IBusEvent {
     }
 
     @Override
-    public void sendEventUserCreated(Mono<DomainEvent> event) {
-        event.subscribe(userCreated -> {
-                    rabbitTemplate.convertAndSend(rabbitProperties.getUserExchange(), rabbitProperties.getUserRoutingKey(), userCreated);
-                }
-        );
+    public void sendEventUserCreated(DomainEvent event) {
+        rabbitTemplate.convertAndSend(rabbitProperties.getUserExchange(), rabbitProperties.getUserRoutingKey(), event);
     }
 }

@@ -1,7 +1,5 @@
 package com.natvalentine.generics.utils;
 
-//3. Generics creation to apply DDD: Entity
-/*An Entity receives an I (ID, but this I must extends from Identity) */
 public abstract class Entity<I extends Identity> {
     private final I id;
 

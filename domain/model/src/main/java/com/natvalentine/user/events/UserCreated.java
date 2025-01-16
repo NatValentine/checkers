@@ -1,4 +1,4 @@
-package com.natvalentine.aggregate.events;
+package com.natvalentine.user.events;
 
 import com.natvalentine.generics.domain.DomainEvent;
 
@@ -7,7 +7,7 @@ public class UserCreated extends DomainEvent {
     private final String username;
 
     public UserCreated(String id, String username) {
-        super(EventsEnum.USER_CREATED.name());
+        super(UserEventsEnum.USER_CREATED.name());
         this.id = id;
         this.username = username;
     }

@@ -6,7 +6,9 @@ dependencies {
     implementation project (':serializer')
     implementation project (':rabbit-info-bus')
     implementation project (':shared')
+    implementation project (':security')
 
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 }

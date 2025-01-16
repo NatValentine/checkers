@@ -1,4 +1,4 @@
-package com.natvalentine.aggregate.events;
+package com.natvalentine.aggregateGame.events;
 
 import com.natvalentine.board.Tile;
 import com.natvalentine.generics.domain.DomainEvent;
@@ -9,7 +9,7 @@ public class PieceMoved extends DomainEvent {
     private final Tile to;
 
     public PieceMoved(String id, Tile from, Tile to) {
-        super(EventsEnum.PIECE_MOVED.name());
+        super(GameEventsEnum.PIECE_MOVED.name());
         this.id = id;
         this.from = from;
         this.to = to;

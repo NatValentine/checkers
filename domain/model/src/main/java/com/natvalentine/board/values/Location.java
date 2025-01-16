@@ -1,7 +1,7 @@
 package com.natvalentine.board.values;
 
 import com.natvalentine.generics.interfaces.IValueObject;
-import com.natvalentine.generics.utils.Vector2;
+import com.natvalentine.utils.Vector2;
 
 public class Location implements IValueObject<Vector2> {
     private final Integer x;

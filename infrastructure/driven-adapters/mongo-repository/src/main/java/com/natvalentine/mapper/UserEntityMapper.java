@@ -9,6 +9,6 @@ public class UserEntityMapper {
     }
 
     public static UserDTO fromEntity(UserEntity user){
-        return new UserDTO(user.getId(), user.getUsername());
+        return new UserDTO(user.getId(), user.getUsername(), user.getPassword());
     }
 }

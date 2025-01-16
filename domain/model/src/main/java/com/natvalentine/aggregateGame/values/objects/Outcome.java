@@ -1,4 +1,4 @@
-package com.natvalentine.aggregate.values.objects;
+package com.natvalentine.aggregateGame.values.objects;
 
 import com.natvalentine.generics.interfaces.IValueObject;
 

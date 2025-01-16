@@ -1,4 +1,4 @@
-package com.natvalentine.aggregate.events;
+package com.natvalentine.aggregateGame.events;
 
 import com.natvalentine.board.Board;
 import com.natvalentine.generics.domain.DomainEvent;
@@ -16,7 +16,7 @@ public class PiecesSet extends DomainEvent {
     private ArrayList<Player> players;
 
     public PiecesSet(Board board, ArrayList<Player> players) {
-        super(EventsEnum.PIECES_SET.name());
+        super(GameEventsEnum.PIECES_SET.name());
         this.board = board;
         this.players = players;
         setPieces();

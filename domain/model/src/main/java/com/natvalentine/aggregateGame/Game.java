@@ -1,10 +1,10 @@
-package com.natvalentine.aggregate;
+package com.natvalentine.aggregateGame;
 
-import com.natvalentine.aggregate.events.*;
-import com.natvalentine.aggregate.values.GameId;
-import com.natvalentine.aggregate.values.objects.Outcome;
-import com.natvalentine.aggregate.values.objects.Status;
-import com.natvalentine.aggregate.values.objects.Turn;
+import com.natvalentine.aggregateGame.events.*;
+import com.natvalentine.aggregateGame.values.GameId;
+import com.natvalentine.aggregateGame.values.objects.Outcome;
+import com.natvalentine.aggregateGame.values.objects.Status;
+import com.natvalentine.aggregateGame.values.objects.Turn;
 import com.natvalentine.board.Board;
 import com.natvalentine.board.Tile;
 import com.natvalentine.board.values.BoardId;
@@ -14,16 +14,12 @@ import com.natvalentine.move.values.MoveId;
 import com.natvalentine.player.Player;
 import com.natvalentine.player.values.PlayerId;
 import com.natvalentine.player.values.objects.IsCurrent;
-import com.natvalentine.user.User;
-import com.natvalentine.user.values.UserId;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Game extends AggregateRoot<GameId> {
-    private User user;
     private ArrayList<Player> players = new ArrayList<>();
     private Board board;
     private Status status;
@@ -51,16 +47,8 @@ public class Game extends AggregateRoot<GameId> {
                 .then(Mono.just(game));
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public void addPlayer(Player player) {
-        if(this.players.toArray().length == 2)
+        if(this.players.size() >= 2)
             throw new RuntimeException("The game is full. Player could not join.");
 
         this.players.add(player);
@@ -118,10 +106,6 @@ public class Game extends AggregateRoot<GameId> {
 
     public void setCurrentTurn(Turn currentTurn) {
         this.currentTurn = currentTurn;
-    }
-
-    public void createUser(String username) {
-        addEvent(new UserCreated(new UserId().getValue(), username)).apply();
     }
 
     public void createPlayer(String userId) {

@@ -1,4 +1,4 @@
-package com.natvalentine.aggregate.values;
+package com.natvalentine.aggregateGame.values;
 
 public enum GameStatus {
     WAITING,

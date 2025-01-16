@@ -1,10 +1,10 @@
-package com.natvalentine.aggregate.events;
+package com.natvalentine.aggregateGame.events;
 
 import com.natvalentine.generics.domain.DomainEvent;
 
 public class TurnPassed extends DomainEvent {
     public TurnPassed() {
-        super(EventsEnum.TURN_PASSED.name());
+        super(GameEventsEnum.TURN_PASSED.name());
         // check game state, trigger game over or next turn
     }
 }
