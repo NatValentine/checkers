@@ -4,6 +4,7 @@ import com.natvalentine.generics.domain.DomainActionsContainer;
 import com.natvalentine.generics.domain.DomainActionsHandler;
 import com.natvalentine.generics.domain.DomainEvent;
 import com.natvalentine.generics.interfaces.IApplyEvent;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
@@ -14,8 +15,8 @@ public abstract class AggregateRoot<I extends Identity> extends Entity<I> {
         super(id);
     }
 
-    public List<DomainEvent> getUncommittedEvents() {
-        return List.copyOf(actionsHandler.getEvents());
+    public Flux<DomainEvent> getUncommittedEvents() {
+        return Flux.fromIterable(actionsHandler.getEvents());
     }
 
     public void markEventsAsCommitted() {

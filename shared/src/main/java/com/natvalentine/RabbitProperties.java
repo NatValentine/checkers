@@ -34,6 +34,15 @@ public class RabbitProperties {
     @Value("${board.updated.routingKey}")
     private String boardUpdatedRoutingKey;
 
+    @Value("${player.created.exchange}")
+    private String playerCreatedExchange;
+
+    @Value("${player.created.queue}")
+    private String playerCreatedQueue;
+
+    @Value("${player.created.routingKey}")
+    private String playerCreatedRoutingKey;
+
     public String getUserExchange() {
         return userExchange;
     }
@@ -68,5 +77,15 @@ public class RabbitProperties {
 
     public String getBoardUpdatedRoutingKey() {
         return boardUpdatedRoutingKey;
+    }
+
+    public String getPlayerCreatedExchange() { return playerCreatedExchange; }
+
+    public String getPlayerCreatedQueue() {
+        return playerCreatedQueue;
+    }
+
+    public String getPlayerCreatedRoutingKey() {
+        return playerCreatedRoutingKey;
     }
 }

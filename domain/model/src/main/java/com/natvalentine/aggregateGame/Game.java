@@ -10,17 +10,21 @@ import com.natvalentine.board.Tile;
 import com.natvalentine.board.values.BoardId;
 import com.natvalentine.generics.domain.DomainEvent;
 import com.natvalentine.generics.utils.AggregateRoot;
+import com.natvalentine.generics.utils.ColorsEnum;
 import com.natvalentine.move.values.MoveId;
 import com.natvalentine.player.Player;
 import com.natvalentine.player.values.PlayerId;
-import com.natvalentine.player.values.objects.IsCurrent;
+import com.natvalentine.player.values.objects.Color;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 
 public class Game extends AggregateRoot<GameId> {
-    private ArrayList<Player> players = new ArrayList<>();
+    private Player whitePlayer;
+    private Player blackPlayer;
+    private Player currentPlayer;
+    private Player idlePlayer;
     private Board board;
     private Status status;
     private Outcome result;
@@ -47,33 +51,41 @@ public class Game extends AggregateRoot<GameId> {
                 .then(Mono.just(game));
     }
 
-    public void addPlayer(Player player) {
-        if(this.players.size() >= 2)
-            throw new RuntimeException("The game is full. Player could not join.");
+    public Player addPlayer(Player player) {
+        if (this.whitePlayer == null){
+            this.whitePlayer = player;
+            player.setColor(Color.of(ColorsEnum.WHITE.name()));
+        }
+        else if (this.blackPlayer == null) {
+            this.blackPlayer = player;
+            player.setColor(Color.of(ColorsEnum.BLACK.name()));
+        } else {
+            throw new RuntimeException("The game is full. Cannot join.");
+        }
 
-        this.players.add(player);
-    }
-
-    public ArrayList<Player> getPlayers() {
-        return this.players;
+        return player;
     }
 
     public Player getCurrentPlayer() {
-        return this.players.stream()
-                .filter(p -> p.getIsCurrent().getValue() == true).findFirst().get();
+        return this.currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     public Player getIdlePlayer() {
-        return this.players.stream()
-                .filter(p -> p.getIsCurrent().getValue() == false).findFirst().get();
+        return this.idlePlayer;
     }
 
-    public void toggleCurrentPlayer() { // this should be an event
-        var playerEndingTurn = this.getCurrentPlayer();
-        var playerStartingTurn = this.getIdlePlayer();
+    public void setIdlePlayer(Player idlePlayer) {
+        this.idlePlayer = idlePlayer;
+    }
 
-        playerEndingTurn.setIsCurrent(IsCurrent.of(false));
-        playerStartingTurn.setIsCurrent(IsCurrent.of(true));
+    public void toggleCurrentPlayer() {
+        var aux = this.currentPlayer;
+        this.currentPlayer = this.idlePlayer;
+        this.idlePlayer = aux;
     }
 
     public Board getBoard() {
@@ -108,18 +120,12 @@ public class Game extends AggregateRoot<GameId> {
         this.currentTurn = currentTurn;
     }
 
+    public void createBoard(ArrayList<Tile> tiles) {
+        addEvent(new BoardCreated(new BoardId().getValue(), tiles)).apply();
+    }
+
     public void createPlayer(String userId) {
-        addEvent(new PlayerCreated(userId, new PlayerId().getValue()));
-    }
-
-    public void secondPlayerJoined() {
-        // can start game
-        addEvent(new SecondPlayerJoined(this.players));
-    }
-
-    public void boardCreated() {
-        addEvent(new BoardCreated(new BoardId().getValue()));
-        addEvent(new PiecesSet(this.board, this.players));
+        addEvent(new PlayerCreated(userId, new PlayerId().getValue())).apply();
     }
 
     public void pieceMoved(Tile from, Tile to) { // MoveCreated

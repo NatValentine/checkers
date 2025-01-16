@@ -1,13 +1,15 @@
-package com.natvalentine.gateway.dto;
+package com.natvalentine.data;
 
-public class PieceDTO {
+import com.natvalentine.gateway.dto.TileDTO;
+
+public class PieceEntity {
     private String id;
     private String type;
     private Boolean isActive;
     private String color;
-    private TileDTO startingLocation;
+    private TileEntity startingLocation;
 
-    public PieceDTO(String id, String type, Boolean isActive, String color, TileDTO startingLocation) {
+    public PieceEntity(String id, String type, Boolean isActive, String color, TileEntity startingLocation) {
         this.id = id;
         this.type = type;
         this.isActive = isActive;
@@ -47,11 +49,11 @@ public class PieceDTO {
         this.color = color;
     }
 
-    public TileDTO getStartingLocation() {
+    public TileEntity getStartingLocation() {
         return startingLocation;
     }
 
-    public void setStartingLocation(TileDTO startingLocation) {
+    public void setStartingLocation(TileEntity startingLocation) {
         this.startingLocation = startingLocation;
     }
 }

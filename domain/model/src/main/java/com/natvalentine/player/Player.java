@@ -8,7 +8,7 @@ import com.natvalentine.user.values.UserId;
 
 public class Player extends Entity<PlayerId> {
     private final UserId userId;
-    private final Color color;
+    private Color color;
     private IsCurrent isCurrent;
 
     public Player(UserId userId, Color color, PlayerId id) {
@@ -23,6 +23,10 @@ public class Player extends Entity<PlayerId> {
 
     public Color getColor() {
         return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public IsCurrent getIsCurrent() {

@@ -1,9 +1,8 @@
 package com.natvalentine.board.queries.responses;
 
-import com.natvalentine.gateway.dto.PieceDTO;
-import com.natvalentine.gateway.dto.TileDTO;
+import com.natvalentine.board.Tile;
 
 import java.util.ArrayList;
 
-public record BoardResponse(String id, ArrayList<TileDTO> tiles, ArrayList<PieceDTO> pieces, String gameId) {
+public record BoardResponse(String id, ArrayList<Tile> tiles, String gameId) {
 }

@@ -1,30 +1,30 @@
 package com.natvalentine.gateway.dto;
 
 public class TileDTO {
-    private Integer locationX;
-    private Integer locationY;
+    private Integer x;
+    private Integer y;
     private PieceDTO piece;
 
-    public TileDTO(Integer locationX, Integer locationY, PieceDTO piece) {
-        this.locationX = locationX;
-        this.locationY = locationY;
+    public TileDTO(Integer x, Integer y, PieceDTO piece) {
+        this.x = x;
+        this.y = y;
         this.piece = piece;
     }
 
-    public Integer getLocationX() {
-        return locationX;
+    public Integer getX() {
+        return x;
     }
 
-    public void setLocationX(Integer locationX) {
-        this.locationX = locationX;
+    public void setX(Integer x) {
+        this.x = x;
     }
 
-    public Integer getLocationY() {
-        return locationY;
+    public Integer getY() {
+        return y;
     }
 
-    public void setLocationY(Integer locationY) {
-        this.locationY = locationY;
+    public void setY(Integer y) {
+        this.y = y;
     }
 
     public PieceDTO getPiece() {

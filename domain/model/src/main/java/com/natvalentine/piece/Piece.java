@@ -4,46 +4,42 @@ import com.natvalentine.generics.utils.ColorsEnum;
 import com.natvalentine.generics.utils.Entity;
 import com.natvalentine.piece.values.PieceId;
 import com.natvalentine.piece.values.PieceTypesEnum;
+import com.natvalentine.piece.values.objects.Color;
 import com.natvalentine.piece.values.objects.IsActive;
 import com.natvalentine.board.Tile;
+import com.natvalentine.piece.values.objects.Type;
 import com.natvalentine.player.Player;
 
 import java.util.ArrayList;
 
 public class Piece extends Entity<PieceId> {
-    private PieceTypesEnum type;
-    private final Tile startingLocation;
-    private Tile currentLocation;
+    private Type type;
+    private Color color;
     private IsActive isActive;
-    private final Player player;
+    private final Tile startingLocation;
 
-    public Piece(PieceId id, PieceTypesEnum type, Tile startingLocation, IsActive isActive, Player player) {
+    public Piece(PieceId id, Tile startingLocation, IsActive isActive, Color color, Type type) {
         super(id);
-        this.type = type;
         this.startingLocation = startingLocation;
-        this.currentLocation = startingLocation;
         this.isActive = isActive;
-        this.player = player;
+        this.color = color;
+        this.type = type;
     }
 
-    private ArrayList<Tile> calculatePosibleMoves() {
-        return new ArrayList<>();
-    }
-
-    public PieceTypesEnum getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(PieceTypesEnum type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public Tile getCurrentLocation() {
-        return currentLocation;
+    public Color getColor() {
+        return color;
     }
 
-    public void setCurrentLocation(Tile currentLocation) {
-        this.currentLocation = currentLocation;
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public IsActive getIsActive() {
@@ -54,14 +50,14 @@ public class Piece extends Entity<PieceId> {
         this.isActive = isActive;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Tile getStartingLocation() {
+        return startingLocation;
     }
 
     @Override
     public String toString() {
-        if (this.type.equals(PieceTypesEnum.PAWN))
-            return this.player.getColor().getValue().equals(ColorsEnum.WHITE.name()) ? "o" : "x";
-        else return this.player.getColor().getValue().equals(ColorsEnum.WHITE.name()) ? "O" : "X";
+        if (this.type.getValue().equals(PieceTypesEnum.PAWN.name()))
+            return this.color.getValue().equals(ColorsEnum.WHITE.name()) ? "o" : "x";
+        else return this.color.getValue().equals(ColorsEnum.WHITE.name()) ? "O" : "X";
     }
 }
