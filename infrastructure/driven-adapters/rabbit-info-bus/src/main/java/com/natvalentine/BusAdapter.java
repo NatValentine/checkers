@@ -27,7 +27,7 @@ public class BusAdapter implements IBusEvent {
 
     @Override
     public void sendEventPlayerCreated(DomainEvent event) {
-        rabbitTemplate.convertAndSend(rabbitProperties.getBoardCreatedExchange(), rabbitProperties.getBoardCreatedRoutingKey(), event);
+        rabbitTemplate.convertAndSend(rabbitProperties.getPlayerCreatedExchange(), rabbitProperties.getPlayerCreatedRoutingKey(), event);
     }
 
 

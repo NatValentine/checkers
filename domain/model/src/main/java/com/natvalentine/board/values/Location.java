@@ -7,7 +7,7 @@ public class Location implements IValueObject<Vector2> {
     private final Integer x;
     private final Integer y;
 
-    private Location (final Integer x, final Integer y) {
+    public Location(final Integer x, final Integer y) {
         this.x = validate(x);
         this.y = validate(y);
     }

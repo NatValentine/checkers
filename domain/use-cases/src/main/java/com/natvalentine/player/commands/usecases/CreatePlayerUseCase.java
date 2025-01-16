@@ -28,17 +28,25 @@ public class CreatePlayerUseCase implements IUseCaseExecute<CreatePlayerCommand,
         var events = eventRepository.findAggregate(request.getAggregateId());
         return Game.from(request.getAggregateId(), events)
                 .flatMap(game -> {
-                    game.createPlayer(request.getUserId());
-                    Player player = game.addPlayer(new Player(UserId.of(request.getUserId()), Color.of(""), new PlayerId()));
+                    var playerId = new PlayerId().getValue();
+                    game.createPlayer(request.getUserId(), playerId);
+
+                    Player newPlayer;
+                    if (game.getWhitePlayer().getId().getValue().equals(playerId))
+                        newPlayer = game.getWhitePlayer();
+                    else if (game.getBlackPlayer().getId().getValue().equals(playerId))
+                        newPlayer = game.getBlackPlayer();
+                    else throw new RuntimeException("Player could not be created.");
 
                     return game.getUncommittedEvents()
                             .flatMap(eventRepository::save)
                             .doOnNext(busEvent::sendEventPlayerCreated)
                             .then(Mono.just(new PlayerResponse(
-                                    player.getId().getValue(),
-                                    player.getUserId().getValue(),
+                                    newPlayer.getId().getValue(),
+                                    newPlayer.getUserId().getValue(),
                                     game.getId().getValue(),
-                                    player.getColor().getValue()
+                                    newPlayer.getColor().getValue(),
+                                    newPlayer.getIsCurrent().getValue()
                             )));
                 });
     }

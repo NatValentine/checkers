@@ -11,7 +11,12 @@ public class Player extends Entity<PlayerId> {
     private Color color;
     private IsCurrent isCurrent;
 
-    public Player(UserId userId, Color color, PlayerId id) {
+    public Player(PlayerId id, UserId userId) {
+        super(id);
+        this.userId = userId;
+    }
+
+    public Player(PlayerId id, UserId userId, Color color) {
         super(id);
         this.color = color;
         this.userId = userId;

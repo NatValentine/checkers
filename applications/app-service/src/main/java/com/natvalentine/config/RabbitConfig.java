@@ -72,6 +72,23 @@ public class RabbitConfig {
     }
 
     @Bean
+    public TopicExchange playerCreatedExchange() {
+        return new TopicExchange(rabbitProperties.getPlayerCreatedExchange());
+    }
+
+    @Bean
+    public Queue playerCreatedQueue() {
+        return new Queue(rabbitProperties.getPlayerCreatedQueue(), true);
+    }
+
+    @Bean
+    public Binding playerCreatedBinding() {
+        return BindingBuilder.bind(playerCreatedQueue())
+                .to(playerCreatedExchange())
+                .with(rabbitProperties.getPlayerCreatedRoutingKey());
+    }
+
+    @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
@@ -97,6 +114,10 @@ public class RabbitConfig {
             amqpAdmin.declareExchange(boardUpdatedExchange());
             amqpAdmin.declareQueue(boardUpdatedQueue());
             amqpAdmin.declareBinding(boardUpdatedBinding());
+
+            amqpAdmin.declareExchange(playerCreatedExchange());
+            amqpAdmin.declareQueue(playerCreatedQueue());
+            amqpAdmin.declareBinding(playerCreatedBinding());
         };
     }
 

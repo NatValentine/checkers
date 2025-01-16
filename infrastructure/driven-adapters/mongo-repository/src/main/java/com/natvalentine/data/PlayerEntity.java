@@ -1,13 +1,21 @@
-package com.natvalentine.gateway.dto;
+package com.natvalentine.data;
 
-public class PlayerDTO {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "players")
+public class PlayerEntity {
+    @Id
     private String id;
+
     private String userId;
     private String gameId;
     private String color;
     private Boolean isCurrent;
 
-    public PlayerDTO(String id, String userId, String gameId, String color, Boolean isCurrent) {
+    public PlayerEntity() {}
+
+    public PlayerEntity(String id, String userId, String gameId, String color, Boolean isCurrent) {
         this.id = id;
         this.userId = userId;
         this.gameId = gameId;

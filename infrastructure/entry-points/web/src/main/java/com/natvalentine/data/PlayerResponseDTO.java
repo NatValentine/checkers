@@ -1,16 +1,14 @@
-package com.natvalentine.gateway.dto;
+package com.natvalentine.data;
 
-public class PlayerDTO {
+public class PlayerResponseDTO {
     private String id;
     private String userId;
-    private String gameId;
     private String color;
     private Boolean isCurrent;
 
-    public PlayerDTO(String id, String userId, String gameId, String color, Boolean isCurrent) {
+    public PlayerResponseDTO(String id, String userId, String color, Boolean isCurrent) {
         this.id = id;
         this.userId = userId;
-        this.gameId = gameId;
         this.color = color;
         this.isCurrent = isCurrent;
     }
@@ -29,14 +27,6 @@ public class PlayerDTO {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(String gameId) {
-        this.gameId = gameId;
     }
 
     public String getColor() {

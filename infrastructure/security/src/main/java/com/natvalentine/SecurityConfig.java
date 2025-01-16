@@ -44,13 +44,13 @@ public class SecurityConfig  {
                         )
                         .permitAll()
 
-                        .pathMatchers(HttpMethod.GET, "/users/**", "/game/**")
+                        .pathMatchers(HttpMethod.GET, "/users/**", "/players/**", "/game/**")
                         .hasAnyRole(RolesEnum.USER.name())
 
                         .pathMatchers(HttpMethod.POST, "users/**")
                         .permitAll()
 
-                        .pathMatchers(HttpMethod.POST, "/game/**")
+                        .pathMatchers(HttpMethod.POST, "/players/**", "/game/**")
                         .hasRole(RolesEnum.USER.name())
 
                         .anyExchange().authenticated()

@@ -5,10 +5,13 @@ import java.util.ArrayList;
 public class BoardDTO {
     private String id;
     private ArrayList<TileDTO> tiles;
+    private String gameId;
 
-    public BoardDTO(String id, ArrayList<TileDTO> tiles) {
+    public BoardDTO(String id, ArrayList<TileDTO> tiles, String gameId) {
         this.id = id;
-        this.tiles = tiles;}
+        this.tiles = tiles;
+        this.gameId = gameId;
+    }
 
     public String getId() {
         return id;
@@ -24,5 +27,13 @@ public class BoardDTO {
 
     public void setTiles(ArrayList<TileDTO> tiles) {
         this.tiles = tiles;
+    }
+
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
     }
 }

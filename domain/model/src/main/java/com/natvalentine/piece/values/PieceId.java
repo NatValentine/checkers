@@ -7,7 +7,7 @@ public class PieceId extends Identity {
         super();
     }
 
-    private PieceId(String value) {
+    public PieceId(String value) {
         super(value);
     }
 
