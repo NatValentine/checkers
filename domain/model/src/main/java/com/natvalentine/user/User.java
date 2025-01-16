@@ -9,10 +9,13 @@ public class User extends Entity<UserId> {
     private final Username username;
     private final Password password;
 
-    public User(UserId id, Username username, Password password) {
+    private final String role;
+
+    public User(UserId id, Username username, Password password, String role) {
         super(id);
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     public Username getUsername() {
@@ -21,5 +24,9 @@ public class User extends Entity<UserId> {
 
     public Password getPassword() {
         return password;
+    }
+
+    public String getRole() {
+        return role;
     }
 }

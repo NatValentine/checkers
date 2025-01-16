@@ -1,5 +1,6 @@
 package com.natvalentine.data;
 
+import com.natvalentine.utils.RolesEnum;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -24,9 +25,11 @@ public class UserEntity {
         this.username = username;
     }
 
-    public UserEntity(String id, String username) {
+    public UserEntity(String id, String username, String password, String role) {
         this.id = id;
         this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
     public String getId() {

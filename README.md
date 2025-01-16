@@ -24,3 +24,6 @@ Must haves:
 8. Consulta de partidas: Este caso de uso permite consultar las partidas que se han jugado históricamente junto al estado en el que quedó el tablero, el ganador (o si quedó en empate) junto con la cantidad de fichas que quedaron.
 9. Todas las rutas deben estar protegidas con Spring Security y JWT.
 
+
+## Swagger docs
+@ http://localhost:8080/webjars/swagger-ui/index.html

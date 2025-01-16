@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Service
 public class JwtServiceAdapter implements JwtService {
-    @Value("${jwt.secret:defaultSecretKey}")
+    @Value("${jwt.secret}")
     private String secretKey;
 
     @Value("${jwt.expiration:86400000}")

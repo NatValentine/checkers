@@ -24,7 +24,9 @@ public class BusListener implements IBusEventListener {
         UserCreated userCreated = (UserCreated) event;
         UserDTO userDTO = new UserDTO(
                 userCreated.getId(),
-                userCreated.getUsername()
+                userCreated.getUsername(),
+                userCreated.getPassword(),
+                userCreated.getRole()
         );
         userSavedViewUseCase.accept(userDTO);
     }

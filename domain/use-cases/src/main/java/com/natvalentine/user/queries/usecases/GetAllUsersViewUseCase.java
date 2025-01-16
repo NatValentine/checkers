@@ -18,7 +18,9 @@ public class GetAllUsersViewUseCase implements IUseCaseEmptyGet<UserResponse> {
         return userRepository.getAll()
                 .map(userDTO -> new UserResponse(
                         userDTO.getId(),
-                        userDTO.getUsername()
+                        userDTO.getUsername(),
+                        userDTO.getRole(),
+                        ""
                 ))
                 .collectList()
                 .flatMap(users -> Mono.just(QueryResponse.ofMultiple(users)));

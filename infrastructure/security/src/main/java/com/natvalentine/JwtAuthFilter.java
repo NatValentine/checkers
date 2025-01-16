@@ -1,6 +1,7 @@
 package com.natvalentine;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,8 +28,15 @@ public class JwtAuthFilter implements WebFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
-        String token = extractTokenFromRequest(exchange.getRequest());
+        String path = exchange.getRequest().getPath().toString();
 
+        if (path.startsWith("/v3/api-docs") ||
+                path.startsWith("/swagger-ui") ||
+                path.startsWith("/users") && exchange.getRequest().getMethod() == HttpMethod.POST) {
+            return chain.filter(exchange);
+        }
+
+        String token = extractTokenFromRequest(exchange.getRequest());
 
         if (token != null && jwtServiceAdapter.isTokenValid(token)) {
             String username = jwtServiceAdapter.extractUsername(token);
@@ -50,7 +58,11 @@ public class JwtAuthFilter implements WebFilter {
                     .contextWrite(ReactiveSecurityContextHolder.withSecurityContext(Mono.just(securityContext)));
         }
 
-        return chain.filter(exchange);
+        if (token == null || !jwtServiceAdapter.isTokenValid(token)) {
+            return Mono.error(new AuthException("Invalid or missing token"));
+        }
+
+        return Mono.error(new AuthException("Unauthorized access"));
     }
 
     private String extractTokenFromRequest(ServerHttpRequest request) {

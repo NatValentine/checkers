@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 
-@Document(collection = "events")
+@Document(collection = "checkers-events")
 public class EventEntity {
     @Id
     private String id;

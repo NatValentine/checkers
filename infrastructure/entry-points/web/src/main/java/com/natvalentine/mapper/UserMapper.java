@@ -7,7 +7,7 @@ import com.natvalentine.user.queries.responses.UserResponse;
 
 public class UserMapper {
     public static UserResponseDTO fromEntity(UserResponse userResponse) {
-        return new UserResponseDTO(userResponse.id(), userResponse.username());
+        return new UserResponseDTO(userResponse.getId(), userResponse.getUsername(), userResponse.getRole(), userResponse.getToken());
     }
 
     public static CreateUserCommand toEntity(UserRequestDTO userRequestDTO) {

@@ -40,12 +40,15 @@ public class SecurityConfig  {
                                 "/swagger-ui.html",
                                 "/webjars/**",
                                 "/swagger-ui/**",
-                                "/webjars/swagger-ui/index.html"
+                                "/webjars/swagger-ui.html"
                         )
                         .permitAll()
 
                         .pathMatchers(HttpMethod.GET, "/users/**", "/game/**")
                         .hasAnyRole(RolesEnum.USER.name())
+
+                        .pathMatchers(HttpMethod.POST, "users/**")
+                        .permitAll()
 
                         .pathMatchers(HttpMethod.POST, "/game/**")
                         .hasRole(RolesEnum.USER.name())
